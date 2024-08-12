@@ -19,12 +19,12 @@ const Hero = () => {
           <p className="font-bold py-2 px-4 flex items-center gap-2 border border-gray-500 rounded-full hover:scale-105 duration-700 text-gray-600">Learn more <Right/></p>
         </div>
       </div>
-      <div className="relative col-span-6 ">
+      <div className="relative ml-8 col-span-6 ">
         <Image
           alt="pizza.exe"
-          layout="fill"
-         
-          objectFit="contain"
+          height={516}
+          width={376}
+          className="rounded-3xl"
           src={"/pizza.jpg"}
         />
       </div>
