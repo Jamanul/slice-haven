@@ -14,7 +14,6 @@ export const POST = async (request) => {
         if(exist){
             return Response.json({message: "user Already exist"})
         }
-        
         const hashedPassword = bcrypt.hashSync(user.password, 14);
         const newUser = {...user,password: hashedPassword}
         //console.log(newUser)

@@ -1,7 +1,8 @@
 "use client"
 import React from "react";
-import bg from "../../../public/pizzaDoodle.jpg";
+import bg from "../../../public/pizza.PNG";
 import Image from "next/image";
+import Link from "next/link";
 
 const registerPage = () => {
   const handleRegister =async (e) => {
@@ -34,7 +35,7 @@ const registerPage = () => {
         alt="pizza"
         className="-z-10 absolute"
         layout="fill"
-        objectFit="cover"
+        
       />
       <div className="relative flex items-center justify-center h-screen">
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -92,6 +93,9 @@ const registerPage = () => {
               <button className="btn bg-primary text-white">Register</button>
             </div>
           </form>
+          <h2 className="text-center pb-1">
+           Already have an account?  <Link href={"/signin"}><span className="text-primary font-bold">Sign in</span></Link>
+          </h2>
         </div>
       </div>
     </div>
