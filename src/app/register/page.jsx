@@ -28,7 +28,7 @@ const registerPage = () => {
     console.log(res)
   };
   return (
-    <div className="h-screen">
+    <div className="">
       <Image
         src={bg}
         alt="pizza"
@@ -38,6 +38,7 @@ const registerPage = () => {
       />
       <div className="relative flex items-center justify-center h-screen">
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+          <h2 className="text-primary text-3xl font-bold text-center pt-4">Register</h2>
           <form onSubmit={handleRegister} className="card-body">
             <div className="form-control">
               <label className="label">
