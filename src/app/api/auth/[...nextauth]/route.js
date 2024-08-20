@@ -29,8 +29,8 @@ const handler = NextAuth({
                 if(!passwordMatched){
                     return null
                 }
-                console.log(currentUser)
-                console.log(passwordMatched)
+                // console.log(currentUser)
+                // console.log(passwordMatched)
                 return currentUser
             }
         }),
