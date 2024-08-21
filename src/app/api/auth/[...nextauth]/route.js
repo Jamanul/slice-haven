@@ -2,7 +2,8 @@ import { connectDb } from "@/app/services/connectDb"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
-const handler = NextAuth({
+
+export const authOptions = {
     secret: "h",
     session:{
         strategy: "jwt",
@@ -60,7 +61,9 @@ const handler = NextAuth({
             return session
           }
     }
-})
+}
+
+const handler = NextAuth(authOptions)
 
 
 
