@@ -28,9 +28,9 @@ const Navbar = () => {
       </div>
       <div className="flex gap-4 items-center">
         {session.status === "authenticated" ? (
-          <button onClick={()=>signOut()} className="bg-primary transform transition-transform duration-300 hover:scale-110 text-white px-6 py-2 rounded-full">
-            Log out
-          </button>
+        <> <Link href={'/profile'}><p className="text-gray-500 font-bold hover:text-primary transition duration-700">{session?.data?.user?.name}</p> </Link> <button onClick={()=>signOut()} className="bg-primary transform transition-transform duration-300 hover:scale-110 text-white px-6 py-2 rounded-full">
+        Log out
+      </button></>
         ) : (
           <>
             {" "}

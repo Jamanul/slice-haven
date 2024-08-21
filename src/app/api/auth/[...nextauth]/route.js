@@ -43,7 +43,7 @@ const handler = NextAuth({
             const db =await connectDb()
             const userCollection = db.collection('users')
             const currentUser = await userCollection.findOne({email:token.email})
-            console.log(currentUser)
+            //console.log(currentUser)
               if(currentUser){
                 token.photUrl = currentUser?.photoUrl
               }
@@ -56,7 +56,7 @@ const handler = NextAuth({
             //console.log(session.user.photoURL)
             
             session.user.image = token?.photUrl
-            console.log(session)
+            //console.log(session)
             return session
           }
     }
