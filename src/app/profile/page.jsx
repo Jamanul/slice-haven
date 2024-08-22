@@ -1,17 +1,22 @@
 "use client";
+import UserTabs from "@/components/layout/UserTabs";
 import { useSession } from "next-auth/react";
 
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const page = () => {
   const session = useSession();
   const image = session?.data?.user?.image;
   const [fullName, setFullName] = useState("");
+  const [isAdmin,setIsAdmin]=useState(true)
+  const pathName =usePathname()
+  //console.log(pathName)
   useEffect(() => {
     if (session?.data?.user?.name) {
       setFullName(session?.data?.user?.name);
+    //   setIsAdmin(session?.data?.user?.isAdmin);
     }
   }, [session, session.status]);
   const handleEditName = async (e) => {
@@ -37,9 +42,7 @@ const page = () => {
 
   return (
     <div className="mx-auto max-w-3xl min-h-screen ">
-      <h2 className="text-primary text-center text-4xl mt-4 font-bold">
-        Profile
-      </h2>
+        <UserTabs isAdmin={isAdmin} pathname={pathName}/>  
       <div className=" max-w-md mx-auto ">
         <div className="flex items-center">
           <div className="text-center">
