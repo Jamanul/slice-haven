@@ -85,12 +85,12 @@ const page = () => {
 
   return (
     <div className="mx-auto max-w-3xl min-h-screen ">
-      <div className="py-12">
+    
         <UserTabs isAdmin={isAdmin} pathname={pathName} />
-      </div>
+     
       <div className="max-w-lg mx-auto ">
         <div className="flex flex-col md:flex-row items-center relative">
-          <div className="text-center md:absolute top-0 left-0">
+          <div className="text-center md:absolute top-0 -left-5">
             <Image
               src={image}
               height={150}

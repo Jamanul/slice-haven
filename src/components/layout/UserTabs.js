@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function UserTabs({isAdmin,pathname}) {
 
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 py-12">
             <Link className={`px-4 py-2 ${pathname ==='/profile' ? "bg-primary text-white":"bg-gray-300"}  rounded-2xl`} href={'/profile'}>Profile</Link>
             {
                 isAdmin ? <> <Link className={`px-4 py-2 ${pathname === "/categories"?"bg-primary text-white":"bg-gray-300" }  rounded-2xl`} href={'/categories'}>Categories</Link>

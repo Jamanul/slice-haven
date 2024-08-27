@@ -9,6 +9,19 @@ const page = () => {
     return (
         <div>
          <UserTabs isAdmin={isAdmin} pathname={pathName}/>  
+         <form action="">
+            <div className='flex flex-col'>
+                 <label >
+                Create A Category
+            </label>
+            <div className='flex gap-2'>
+            <input type="text"  className='input input-bordered max-w-md grow'/>
+            <input type="submit" value="Create" className='bg-primary btn text-white' />
+            </div>
+       
+            </div>
+           
+         </form>
         </div>
     );
 };
