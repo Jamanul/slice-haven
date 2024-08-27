@@ -1,22 +1,25 @@
 "use client";
 import UserTabs from "@/components/layout/UserTabs";
+import axios from "axios";
 import { useSession } from "next-auth/react";
 
 import Image from "next/image";
 import { redirect, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
+  const imageHostingKEY = process.env.NEXT_PUBLIC_IMAGE_HOSTING
 const page = () => {
+
+//console.log(imageHostingKEY)
   const session = useSession();
   const image = session?.data?.user?.image;
   const [fullName, setFullName] = useState("");
-  const [isAdmin,setIsAdmin]=useState(true)
-  const pathName =usePathname()
+  const [isAdmin, setIsAdmin] = useState(true);
+  const pathName = usePathname();
   //console.log(pathName)
   useEffect(() => {
     if (session?.data?.user?.name) {
       setFullName(session?.data?.user?.name);
-    //   setIsAdmin(session?.data?.user?.isAdmin);
+      //   setIsAdmin(session?.data?.user?.isAdmin);
     }
   }, [session, session.status]);
   const handleEditName = async (e) => {
@@ -36,19 +39,39 @@ const page = () => {
     console.log(res);
   };
 
-  if(session.status== 'unauthenticated'){
-    return redirect('/signin')
+  const handleImage = async(e)=>{
+    //console.log(e.target.files[0])
+    const image = {image: e.target.files[0]}
+    const res =await axios.post(`https://api.imgbb.com/1/upload?key=${imageHostingKEY}`,image,{
+      headers: {"content-type":'multipart/form-data'}
+    })
+    console.log(res.data)
+  }
+
+  if (session.status == "unauthenticated") {
+    return redirect("/signin");
   }
 
   return (
     <div className="mx-auto max-w-3xl min-h-screen ">
-        <UserTabs isAdmin={isAdmin} pathname={pathName}/>  
+      <div className="py-12">
+        <UserTabs isAdmin={isAdmin} pathname={pathName} />
+      </div>
       <div className=" max-w-md mx-auto ">
         <div className="flex items-center">
           <div className="text-center">
-            <Image src={image} height={150} width={150} alt="logo" className="rounded-2xl"/>
+            <Image
+              src={image}
+              height={150}
+              width={150}
+              alt="logo"
+              className="rounded-2xl"
+            />
             <button className="font-bold border rounded-2xl px-4 py-2">
-              Change Image
+              <label>
+                <input type="file" name="" id="" className="hidden" onChange={handleImage}/>
+                <span>Change Image</span>
+              </label>
             </button>
           </div>
           <form
