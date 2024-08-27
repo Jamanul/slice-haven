@@ -17,9 +17,9 @@ export const PUT = async(request)=>{
                 photoUrl : imageUrl
             },
           };
-        console.log(imageUrl)
+        //console.log(imageUrl)
         const result = await userCollection.updateOne({email:session?.user?.email},updateDoc,options)
-        console.log(result)
+        //console.log(result)
         return Response.json(result)
     } catch (error) {
         console.log(error)

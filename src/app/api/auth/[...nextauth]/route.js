@@ -47,6 +47,11 @@ export const authOptions = {
             //console.log(currentUser)
               if(currentUser){
                 token.photUrl = currentUser?.photoUrl
+                token.phoneNumber=currentUser.phoneNumber
+                token.street=currentUser.street
+                token.zip=currentUser.zip
+                token.country=currentUser.country
+                token.city=currentUser.city
               }
             
             return token
@@ -57,6 +62,11 @@ export const authOptions = {
             //console.log(session.user.photoURL)
             
             session.user.image = token?.photUrl
+            session.user.phoneNumber=token.phoneNumber
+            session.user.street=token.street
+            session.user.zip=token.zip
+            session.user.country=token.country
+            session.user.city=token.city
             //console.log(session)
             return session
           }
