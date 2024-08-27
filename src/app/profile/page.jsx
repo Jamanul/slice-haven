@@ -21,7 +21,7 @@ const page = () => {
       setFullName(session?.data?.user?.name);
       //   setIsAdmin(session?.data?.user?.isAdmin);
     }
-  }, [session, session.status]);
+  }, [session, session.status,image]);
   const handleEditName = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -45,7 +45,20 @@ const page = () => {
     const res =await axios.post(`https://api.imgbb.com/1/upload?key=${imageHostingKEY}`,image,{
       headers: {"content-type":'multipart/form-data'}
     })
-    console.log(res.data)
+    //console.log(res.data)
+    //console.log(res.data.data.url)
+    if(res.data.success){
+      //console.log(res.data.data.url)
+    await fetch('http://localhost:3000/api/editPhoto',{
+        body: JSON.stringify(res.data.data.url),
+        headers:{
+          "content-type": "application/json"
+        },
+        method:"PUT"
+      });
+      window.location.reload()
+      //console.log(res)
+    }
   }
 
   if (session.status == "unauthenticated") {
