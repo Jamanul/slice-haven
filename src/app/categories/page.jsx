@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 const page = () => {
   const [isAdmin, setIsAdmin] = useState(true);
   const [category, setCategory] = useState([]);
+  const [inputValue,setInputValue]=useState('')
   const [singleCategory,setSingleCategory]=useState(null)
   const pathName = usePathname();
   useEffect(() => {
@@ -24,13 +25,20 @@ const page = () => {
   const handleCategories = async (e) => {
     e.preventDefault();
     const name = e.target.category.value;
+    const data ={
+        category: name
+    }
+    if(singleCategory){
+       data._id =singleCategory._id
+    }
     const res = await fetch("http://localhost:3000/api/categories", {
-      body: JSON.stringify({ category: name }),
+      body: JSON.stringify(data),
       headers: {
         "content-type": "application/json",
       },
-      method: "POST",
+      method: singleCategory ? "PUT":"POST",
     });
+    getCategory()
     console.log(res);
   };
   return (
@@ -43,7 +51,9 @@ const page = () => {
             <input
               type="text"
               name="category"
+              value={inputValue}
               className="input input-bordered max-w-md grow"
+              onChange={e=>setInputValue(e.target.value)}
             />
             <input
               type="submit"
@@ -69,7 +79,7 @@ const page = () => {
               <tr key={c._id}>
                 <th>{idx + 1}</th>
                 <td>{c.category}</td>
-                <td><button onClick={()=>setSingleCategory(c)} className="bg-primary text-white btn">Update</button></td>
+                <td><button onClick={()=>{setSingleCategory(c);setInputValue(c.category)}} className="bg-primary text-white btn">Update</button></td>
               </tr>
             ))}
           </tbody>
