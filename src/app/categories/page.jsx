@@ -2,6 +2,7 @@
 import UserTabs from "@/components/layout/UserTabs";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { MdDelete } from "react-icons/md";
 
 const page = () => {
   const [isAdmin, setIsAdmin] = useState(true);
@@ -41,6 +42,14 @@ const page = () => {
     getCategory()
     console.log(res);
   };
+  const handleDelete=async(id)=>{
+    const res = await fetch(`http://localhost:3000/api/categories`,{
+      method: "delete",
+      body: JSON.stringify(id)
+    })
+    getCategory()
+    console.log(res);
+  }
   return (
     <div>
       <UserTabs isAdmin={isAdmin} pathname={pathName} />
@@ -72,6 +81,7 @@ const page = () => {
               <th>No</th>
               <th>Category Name</th>
                 <th>Update</th>
+                <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -80,6 +90,7 @@ const page = () => {
                 <th>{idx + 1}</th>
                 <td>{c.category}</td>
                 <td><button onClick={()=>{setSingleCategory(c);setInputValue(c.category)}} className="bg-primary text-white btn">Update</button></td>
+                <td><button onClick={()=>handleDelete(c._id)} className="bg-primary text-white p-2 text-3xl"><MdDelete/></button></td>
               </tr>
             ))}
           </tbody>

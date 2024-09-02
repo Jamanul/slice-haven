@@ -43,3 +43,16 @@ export const PUT =async(request)=>{
         console.log(error)
     }
 }
+
+export const DELETE = async (request)=>{
+    const db = await connectDb()
+    const categoriesCollection = await db.collection('categories')
+    try {
+        const id =await request.json()
+        console.log(id)
+        const result=await categoriesCollection.deleteOne({_id:new ObjectId(id)})
+        return Response.json(result) 
+    } catch (error) {
+        console.log(error)
+    }
+}
